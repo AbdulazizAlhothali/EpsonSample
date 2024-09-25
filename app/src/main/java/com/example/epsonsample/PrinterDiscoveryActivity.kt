@@ -22,7 +22,7 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var printerListAdapter: SimpleAdapter
     private var filterOption: FilterOption? = null
-    private lateinit var printerList: ArrayList<HashMap<String, String>>
+    private var printerList: ArrayList<HashMap<String, String>> = arrayListOf()
 
     private val discoveryListener =
         DiscoveryListener { deviceInfo ->
@@ -38,7 +38,8 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        printerList = arrayListOf()
+        setContentView(binding.root)
+
         printerListAdapter = SimpleAdapter(
             this,
             printerList,
@@ -58,9 +59,6 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
         binding.btnRestart.setOnClickListener {
             restartDiscovery()
         }
-
-        setContentView(binding.root)
-
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -68,6 +66,9 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
         val target = printerList[position].get("Target")
 
         Log.d("target", target.toString())
+        val intent = Intent(this, ContentActivity::class.java)
+        intent.putExtra("target", target)
+        startActivity(intent)
     }
 
     private fun restartDiscovery() {
