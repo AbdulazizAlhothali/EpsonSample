@@ -90,7 +90,7 @@ class ContentActivity : AppCompatActivity(), ReceiveListener,
         return true
     }
 
-    private fun createReceiptData(bodyScreenShot: Bitmap): Boolean {
+    private fun createReceiptData(bodyScreenShot: Bitmap?): Boolean {
 
         if (printer == null) {
             return false
@@ -102,7 +102,7 @@ class ContentActivity : AppCompatActivity(), ReceiveListener,
 
             printer?.addImage(
                 bodyScreenShot, 0, 0,
-                bodyScreenShot.width,
+                bodyScreenShot?.width!!,
                 bodyScreenShot.height,
                 Printer.COLOR_1,
                 Printer.MODE_MONO,
@@ -195,7 +195,7 @@ class ContentActivity : AppCompatActivity(), ReceiveListener,
             return false
         }
 
-        if (!createReceiptData(bodyScreenShot!!)) {
+        if (!createReceiptData(bodyScreenShot)) {
             finalizeObject()
             return false
         }
