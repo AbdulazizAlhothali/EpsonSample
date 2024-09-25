@@ -8,8 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="30sp"
-        android:textColor="@color/white" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/Target"
@@ -18,6 +17,5 @@
         android:layout_alignLeft="@+id/PrinterName"
         android:layout_below="@+id/PrinterName"
         android:layout_margin="5dp"
-        android:textSize="20sp"
-        android:textColor="@color/white" />
+        android:textSize="20sp"/>
 </LinearLayout>

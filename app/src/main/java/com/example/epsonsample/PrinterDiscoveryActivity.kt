@@ -26,11 +26,13 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
 
     private val discoveryListener =
         DiscoveryListener { deviceInfo ->
-            val item = java.util.HashMap<String, String>()
-            item["PrinterName"] = deviceInfo.deviceName
-            item["Target"] = deviceInfo.target
-            printerList.add(item)
-            printerListAdapter.notifyDataSetChanged()
+            runOnUiThread {
+                val item = java.util.HashMap<String, String>()
+                item["PrinterName"] = deviceInfo.deviceName
+                item["Target"] = deviceInfo.target
+                printerList.add(item)
+                printerListAdapter.notifyDataSetChanged()
+            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
