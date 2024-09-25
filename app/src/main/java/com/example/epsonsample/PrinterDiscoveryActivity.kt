@@ -26,13 +26,11 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
 
     private val discoveryListener =
         DiscoveryListener { deviceInfo ->
-            runOnUiThread {
-                val item = java.util.HashMap<String, String>()
-                item["PrinterName"] = deviceInfo.deviceName
-                item["Target"] = deviceInfo.target
-                printerList.add(item)
-                printerListAdapter.notifyDataSetChanged()
-            }
+            val item = java.util.HashMap<String, String>()
+            item["PrinterName"] = deviceInfo.deviceName
+            item["Target"] = deviceInfo.target
+            printerList.add(item)
+            printerListAdapter.notifyDataSetChanged()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,7 +111,7 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
                 try {
                     Discovery.start(this, filterOption, discoveryListener)
                 } catch (e: Exception) {
-                    e.stackTrace
+                    e.printStackTrace()
                 }
             } else {
                 // denied
@@ -127,7 +125,7 @@ class PrinterDiscoveryActivity : AppCompatActivity(), OnItemClickListener {
                     try {
                         Discovery.start(this, filterOption, discoveryListener)
                     } catch (e: Exception) {
-                        e.stackTrace
+                        e.printStackTrace()
                     }
                 }
             }
